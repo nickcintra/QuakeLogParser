@@ -1,0 +1,6 @@
+@QuakeLogParser_HostAddress = http://localhost:5033
+
+GET {{QuakeLogParser_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
