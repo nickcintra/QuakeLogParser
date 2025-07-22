@@ -10,22 +10,15 @@ namespace QuakeLogParser.Core.Services
   public class LogReader : ILogReader
   {
 
-    private readonly string _filePath;
-
-    public LogReader(string filePath)
-    {
-      _filePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
-    }
-
     public IEnumerable<string> ReadLines(string filePath)
     {
-      if (string.IsNullOrEmpty(_filePath))
-        throw new InvalidOperationException("File path must be provided.");
+      if (string.IsNullOrEmpty(filePath))
+        throw new ArgumentNullException(nameof(filePath));
 
-      if (!File.Exists(_filePath))
-        throw new FileNotFoundException("The log file was not found.", _filePath);
+      if (!File.Exists(filePath))
+        throw new FileNotFoundException("The log file was not found.", filePath);
 
-      return File.ReadLines(_filePath);
+      return File.ReadLines(filePath);
     }
   }
 }
