@@ -34,18 +34,16 @@ namespace QuakeLogParser.Core.Services
         foreach (var line in _logReader.ReadLines(filePath))
         {
           // Inicia um novo jogo quando encontrar "InitGame"
-          if (line.Contains("InitGame"))
+          if (IsInitGame(line))
           {
-            currentGame = new Game { GameId = $"game_{gameCounter}" };
+            currentGame = CreateNewGame(gameCounter++);
             games.Add(currentGame);
-            gameCounter++;
+            continue; // Não processa a linha de InitGame como evento
           }
 
-          // Processa os eventos no log (morte, itens, etc.)
-          foreach (var processor in _eventProcessors)
-          {
-            currentGame?.ProcessLogLine(line, processor);
-          }
+          if (currentGame != null)
+            ProcessLineWithProcessors(currentGame, line);
+
         }
       }
       catch (IOException ex)
@@ -55,22 +53,40 @@ namespace QuakeLogParser.Core.Services
       }
 
       // Garante que todos os jogadores estejam no dicionário de kills
-      foreach (var game in games)
-      {
-          foreach (var player in game.Players)
-          {
-              if (!game.KillsByPlayer.ContainsKey(player))
-                  game.KillsByPlayer[player] = 0;
-          }
-      }
+      EnsureAllPlayersInKills(games);
+
       return games;
     }
 
+    // Métodos auxiliares privados:
+    private bool IsInitGame(string line) => line.Contains("InitGame");
+    private Game CreateNewGame(int gameCounter) => new Game { GameId = $"game_{gameCounter}" };
+
+    private void ProcessLineWithProcessors(Game game, string line)
+    {
+      foreach (var processor in _eventProcessors)
+      {
+        game.ApplyLogProcessor(line, processor);
+      }
+    }
+
+    private void EnsureAllPlayersInKills(List<Game> games)
+    {
+      foreach (var game in games)
+      {
+        foreach (var player in game.Players)
+        {
+          if (!game.KillsByPlayer.ContainsKey(player))
+            game.KillsByPlayer[player] = 0;
+        }
+      }
+    }
   }
 
+  
   public static class GameExtensions
   {
-    public static void ProcessLogLine(this Game game, string line, ILogProcessor processor)
+    public static void ApplyLogProcessor(this Game game, string line, ILogProcessor processor)
     {
       if (game != null && processor != null)
         processor.Processor(line, game);

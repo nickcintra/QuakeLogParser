@@ -14,4 +14,11 @@
     <ProjectReference Include="..\QuakeLogParser.Core\QuakeLogParser.Core.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+  
 </Project>
