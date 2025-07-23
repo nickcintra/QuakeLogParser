@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IPlayerManager, PlayerManager>();
 builder.Services.AddScoped<IKillUpdater, KillUpdater>();
 builder.Services.AddScoped<ILogProcessor, KillEventProcessor>();
+builder.Services.AddScoped<ILogProcessor, PlayerConnectionProcessor>();
 builder.Services.AddScoped<ILogReader, LogReader>();
 builder.Services.AddScoped<LogParserService>();
 

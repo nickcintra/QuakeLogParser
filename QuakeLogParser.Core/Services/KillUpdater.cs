@@ -12,6 +12,11 @@ namespace QuakeLogParser.Core.Services
   {
     public void UpdateKills(string attacker, string victim, Game game)
     {
+
+      //Ignorando o suicídio
+      if (attacker == victim && attacker != "<world>")
+        return;
+
       if(attacker == "<world>")
       {
         game.TotalKills++;
