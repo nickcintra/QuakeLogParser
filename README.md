@@ -219,16 +219,6 @@ Os testes cobrem parsing, regras de negócio e integração básica.
 
 ---
 
-## Explicação da Solução
-
-- O parser lê o arquivo linha a linha, identifica o início de cada jogo e processa eventos de kill.
-- Usa injeção de dependência para facilitar testes e extensibilidade.
-- A API retorna os dados no formato exato pedido no desafio, com chaves `game_1`, `game_2`, etc.
-- O código é modular, com separação clara entre parsing, regras de negócio e exposição via API.
-- A documentação dos endpoints é gerada automaticamente via Swagger, com comentários XML no código.
-
----
-
 ## Contribuição
 
 Pull requests são bem-vindos!  
