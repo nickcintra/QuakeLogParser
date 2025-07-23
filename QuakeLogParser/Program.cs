@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-//Adicionando depend�ncias
+//Adicionando dependencias
 builder.Services.AddScoped<IPlayerManager, PlayerManager>();
 builder.Services.AddScoped<IKillUpdater, KillUpdater>();
 builder.Services.AddScoped<ILogProcessor, KillEventProcessor>();
