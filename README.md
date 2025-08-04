@@ -219,13 +219,6 @@ Os testes cobrem parsing, regras de negócio e integração básica.
 
 ---
 
-## Contribuição
-
-Pull requests são bem-vindos!  
-Sugestões, melhorias e correções são sempre apreciadas.
-
----
-
 ## Licença
 
 Este projeto é apenas para fins de avaliação técnica. 
