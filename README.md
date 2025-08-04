@@ -201,12 +201,6 @@ O projeto aplica os princípios do SOLID:
 
 ---
 
-### 🤝 Como contribuir
-- Sugestões, melhorias e correções são bem-vindas!
-- Para contribuir, abra uma issue ou envie um pull request.
-
----
-
 ## Testes
 
 Para rodar os testes:
